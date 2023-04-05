@@ -6,12 +6,13 @@ import Header from "./components/Header";
 import SearchCrypto from "./components/SearchCrypto";
 import CoinCard from "./components/CoinCard";
 
-import { CryptoData } from "./types";
+import { CryptoDataTypes } from "./types";
 
 const App: React.FC = () => {
   const [searchResult, setSearchResult] = useState<string>("");
-  const [cryptoData, setCryptoData] = useState<CryptoData | null>(null);
+  const [cryptoData, setCryptoData] = useState<CryptoDataTypes | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const handleSearch = (result: string) => {
     setSearchResult(result.toLowerCase());
@@ -19,15 +20,26 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const fetchCryptoData = async () => {
-      setLoading(true);
-      const res = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${searchResult}?localization=true&tickers=false&market_data=true&community_data=true`
-      );
-      setCryptoData(res.data);
+      try {
+        const res = await axios.get(
+          `https://api.coingecko.com/api/v3/coins/${searchResult}?localization=true&tickers=false&market_data=true&community_data=true`
+        );
+        if (res.data.length === 0) {
+          setError("No results found");
+        } else {
+          setCryptoData(res.data);
+        }
+      } catch (error) {
+        setError(
+          "No crypto data found. Please check your spelling and try again"
+        );
+      }
       setLoading(false);
     };
+
     if (searchResult !== "") {
       fetchCryptoData();
+      setError("");
     }
   }, [searchResult]);
 
@@ -40,9 +52,12 @@ const App: React.FC = () => {
       </div>
       <div className="container">
         <SearchCrypto handleSearch={handleSearch} />
-        {searchResult !== "" && !loading && cryptoData && (
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+        {cryptoData && <CoinCard cryptoData={cryptoData} />}
+        {/* {searchResult !== "" && !loading && cryptoData && (
           <CoinCard cryptoData={cryptoData} />
-        )}
+        )} */}
       </div>
     </div>
   );

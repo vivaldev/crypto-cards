@@ -1,4 +1,4 @@
-export interface CryptoData {
+export interface CryptoDataTypes {
   id: string;
   symbol: string;
   name: string;

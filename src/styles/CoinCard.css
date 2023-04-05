@@ -1,0 +1,73 @@
+.CoinCard {
+  width: 35%;
+  height: 55%;
+
+  border: 1px solid #726c6c;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: #16191d;
+
+  font-size: 16px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100%;
+  height: 25%;
+
+  border-bottom: 3px double #726c6c;
+  font-size: 18px;
+}
+
+.symbol-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  height: 100%;
+  width: 40%;
+
+  /* border: 1px solid #726c6c; */
+}
+
+.coin-image {
+  width: 2em;
+  height: 2em;
+
+  margin: 0;
+}
+
+.symbol {
+  margin: 0;
+}
+
+.data-wrapper {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 0.1em 0.5em;
+  padding: 0 0.25em;
+
+  border: 1px solid #726c6c;
+  border-radius: 10px;
+
+  height: 20%;
+}
