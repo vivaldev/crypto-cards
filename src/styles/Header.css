@@ -1,0 +1,11 @@
+.Header {
+  border-bottom: 1px solid rgb(143, 133, 133);
+  margin-bottom: 0.25em;
+
+  width: 90%;
+
+  display: flex;
+  justify-content: center;
+
+  color: rgb(182, 156, 156);
+}
